@@ -4,8 +4,16 @@ import { UpdateTweetDto } from './dto/update-tweet.dto';
 
 @Injectable()
 export class TweetsService {
+  timeline(id: number) {
+    return id;
+  }
+
   create(createTweetDto: CreateTweetDto) {
-    return 'This action adds a new tweet';
+    const tweet = {
+      id: createTweetDto.id,
+      tweet: createTweetDto.tweet,
+    };
+    return tweet;
   }
 
   findAll() {

@@ -1,24 +1,44 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
+import { FollowUserDto } from './dto/follow-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
+let id = 1;
 @Injectable()
 export class UsersService {
   create(createUserDto: CreateUserDto) {
     const user = {
       email: createUserDto.email,
       password: createUserDto.password,
-      username: createUserDto.username,
+      name: createUserDto.name,
+      profile: createUserDto.profile,
+      id: id++,
     };
     return user;
   }
 
-  login(email: string, password: string) {
+  login(query: CreateUserDto) {
+    const email = query.email;
+    const password = query.password;
     return `action returns login${email} ${password}`;
   }
 
   logout() {
     return 'this action returns logout';
+  }
+
+  follow(followUserDto: FollowUserDto) {
+    const temp = [followUserDto.userId, followUserDto.userIdToFollow];
+    return temp;
+  }
+
+  unFollow(followUserDto: FollowUserDto) {
+    const temp = [
+      followUserDto.userId,
+      followUserDto.userIdToFollow,
+      'unfollow',
+    ];
+    return temp;
   }
 
   findAll() {

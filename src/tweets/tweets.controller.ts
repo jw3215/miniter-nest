@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { TweetsService } from './tweets.service';
 import { CreateTweetDto } from './dto/create-tweet.dto';
 import { UpdateTweetDto } from './dto/update-tweet.dto';
@@ -15,6 +23,11 @@ export class TweetsController {
   @Get()
   findAll() {
     return this.tweetsService.findAll();
+  }
+
+  @Get('timeline/:id')
+  timeline(@Param('id') id: string) {
+    return this.tweetsService.timeline(+id);
   }
 
   @Get(':id')

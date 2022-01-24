@@ -11,6 +11,7 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { FollowUserDto } from './dto/follow-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -22,13 +23,23 @@ export class UsersController {
   }
 
   @Get('login/')
-  login(@Query('email') email: string, @Query('password') password: string) {
-    return this.usersService.login(email, password);
+  login(@Query() query: CreateUserDto) {
+    return this.usersService.login(query);
   }
 
   @Get('logout/')
   logout() {
     return this.usersService.logout();
+  }
+
+  @Post('follow/')
+  follow(@Body() followUserDto: FollowUserDto) {
+    return this.usersService.follow(followUserDto);
+  }
+
+  @Post('unfollow/')
+  unFollow(@Body() followUserDto: FollowUserDto) {
+    return this.usersService.unFollow(followUserDto);
   }
 
   @Get()
