@@ -5,7 +5,20 @@ import { UpdateUserDto } from './dto/update-user.dto';
 @Injectable()
 export class UsersService {
   create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+    const user = {
+      email: createUserDto.email,
+      password: createUserDto.password,
+      username: createUserDto.username,
+    };
+    return user;
+  }
+
+  login(email: string, password: string) {
+    return `action returns login${email} ${password}`;
+  }
+
+  logout() {
+    return 'this action returns logout';
   }
 
   findAll() {
