@@ -1,14 +1,13 @@
-import { ConsoleLogger, Injectable } from '@nestjs/common';
-import { getManager } from 'typeorm';
+import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { MySQL } from 'fxsql';
 
 const { CONNECT } = MySQL;
 const POOL = CONNECT({
-  host: 'localhost',
-  port: 3307,
+  host: 'miniter-project-db.cld3omwfpuvc.ap-northeast-2.rds.amazonaws.com',
+  port: 3306,
   user: 'root',
-  password: '117018',
+  password: 'test1234',
   database: 'miniter',
 });
 
