@@ -24,7 +24,7 @@ export class UserRepository {
   async create(createUserDto: CreateUserDto) {
     const res = await QUERY`INSERT INTO ${TABLE(this.table)}
       ${VALUES(createUserDto)}`;
-    return { _id: res.insertId, ...createUserDto };
+    return { id: res.insertId, ...createUserDto };
   }
 
   async findAll() {
@@ -41,21 +41,21 @@ export class UserRepository {
       await QUERY`
       SELECT ${COLUMN(...columns)}
       FROM ${TABLE(this.table)} 
-      WHERE ${EQ({ _id: id })}
+      WHERE ${EQ({ id: id })}
       `
     )[0];
   }
 
   async update(id: number, updateUserDto: any) {
     await QUERY` UPDATE ${TABLE(this.table)} ${SET(updateUserDto)} WHERE ${EQ({
-      _id: id,
+      id: id,
     })} `;
     return this.findOne(id);
   }
 
   async remove(pk: number) {
     const conditions = {
-      _id: pk,
+      id: pk,
     };
     await QUERY`
       DELETE FROM ${TABLE(this.table)}
