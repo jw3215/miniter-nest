@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserRepository } from './users.database-repository';
+import { UsersRepository } from './users.database-repository';
 
 describe('UserDatabaseRespository', () => {
-  let provider: UserRepository;
+  let provider: UsersRepository;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [UserRepository],
+      providers: [UsersRepository],
     }).compile();
 
-    provider = module.get<UserRepository>(UserRepository);
+    provider = module.get<UsersRepository>(UsersRepository);
   });
 
   it('should be defined', () => {

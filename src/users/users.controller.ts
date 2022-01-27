@@ -12,19 +12,24 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { FollowUserDto } from './dto/follow-user.dto';
+import { AuthService } from 'src/auth/auth.service';
+import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Post()
   signUp(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
-  @Get('login/')
-  login(@Query() query: CreateUserDto) {
-    return this.usersService.login(query);
+  @Post('login/')
+  login(@Body() loginRequestDto: LoginRequestDto) {
+    return this.authService.jwtLogIn(loginRequestDto);
   }
 
   @Get('logout/')

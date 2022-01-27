@@ -14,7 +14,7 @@ const POOL = CONNECT({
 const { QUERY, COLUMN, VALUES, TABLE, EQ, SET } = POOL;
 
 @Injectable()
-export class UserRepository {
+export class UsersRepository {
   table: string;
 
   constructor() {
@@ -42,6 +42,17 @@ export class UserRepository {
       SELECT ${COLUMN(...columns)}
       FROM ${TABLE(this.table)} 
       WHERE ${EQ({ id: id })}
+      `
+    )[0];
+  }
+
+  async findUserByEmail(email: string) {
+    const columns = '*';
+    return (
+      await QUERY`
+      SELECT ${COLUMN(...columns)}
+      FROM ${TABLE(this.table)} 
+      WHERE ${EQ({ email: email })}
       `
     )[0];
   }

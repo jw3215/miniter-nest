@@ -3,11 +3,11 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { FollowUserDto } from './dto/follow-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 // import { UserRepository } from './entities/user.memory-repository';
-import { UserRepository } from './users.database-repository';
+import { UsersRepository } from './users.database-repository';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(private readonly userRepository: UsersRepository) {}
 
   create(createUserDto: CreateUserDto) {
     return this.userRepository.create(createUserDto);
