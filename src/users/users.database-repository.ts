@@ -15,11 +15,12 @@ const { QUERY, COLUMN, VALUES, TABLE, EQ, SET } = POOL;
 
 @Injectable()
 export class UsersRepository {
-  table: string;
-
-  constructor() {
-    this.table = 'users';
-  }
+  private table: string = 'users';
+  
+  // table: string;
+  // constructor() {
+  //   this.table = 'users';
+  // }
 
   async create(createUserDto: CreateUserDto) {
     const res = await QUERY`INSERT INTO ${TABLE(this.table)}
